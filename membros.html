@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Área de Membros | Concurso Ji-Paraná RO</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="members-body">
+  <header class="topbar">
+    <div>
+      <p class="top-kicker">Área exclusiva do aluno</p>
+      <h1>Concurso Ji-Paraná RO</h1>
+      <p id="welcomeText" class="welcome-text">Bem-vindo(a)!</p>
+    </div>
+
+    <div class="top-actions">
+      <a class="ghost-btn" href="https://wa.me/5500000000000" target="_blank" rel="noopener noreferrer">Suporte</a>
+      <button class="logout-btn" onclick="logout()">Sair</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-card">
+      <div>
+        <span class="hero-badge">Preparatório completo</span>
+        <h2>Todos os materiais organizados em um só lugar</h2>
+        <p>
+          Acesse apostilas, aulas, cronograma, simulados, PDFs e conteúdos extras do
+          preparatório para Ji-Paraná RO.
+        </p>
+      </div>
+
+      <div class="hero-stats">
+        <div class="stat-box">
+          <strong>06</strong>
+          <span>Módulos</span>
+        </div>
+        <div class="stat-box">
+          <strong>PDFs</strong>
+          <span>Atualizados</span>
+        </div>
+        <div class="stat-box">
+          <strong>Bônus</strong>
+          <span>Exclusivos</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main class="members-container">
+    <section class="section-head">
+      <div>
+        <h3>Seus materiais</h3>
+        <p>Troque os links abaixo pelos seus arquivos reais em PDF, vídeos, grupos e bônus.</p>
+      </div>
+      <a class="primary-link" href="https://wa.me/5500000000000" target="_blank" rel="noopener noreferrer">Entrar no suporte VIP</a>
+    </section>
+
+    <section class="module-grid">
+      <article class="module-card featured-card">
+        <span class="module-tag">Comece por aqui</span>
+        <h4>Módulo 1 - Edital e plano de estudos</h4>
+        <p>Materiais de início rápido para o aluno entender a prova e seguir a ordem correta de estudo.</p>
+        <div class="module-links">
+          <a href="materiais/edital.pdf" target="_blank">Baixar edital</a>
+          <a href="materiais/plano-de-estudos.pdf" target="_blank">Plano de estudos</a>
+          <a href="materiais/cronograma-inicial.pdf" target="_blank">Cronograma inicial</a>
+        </div>
+      </article>
+
+      <article class="module-card">
+        <span class="module-tag">Disciplina</span>
+        <h4>Módulo 2 - Língua Portuguesa</h4>
+        <p>Aulas, apostilas, exercícios e revisão prática para reforço dos principais temas.</p>
+        <div class="module-links">
+          <a href="materiais/portugues-apostila.pdf" target="_blank">Apostila de Português</a>
+          <a href="materiais/portugues-exercicios.pdf" target="_blank">Lista de exercícios</a>
+          <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">Assistir aula 01</a>
+        </div>
+      </article>
+
+      <article class="module-card">
+        <span class="module-tag">Disciplina</span>
+        <h4>Módulo 3 - Matemática e Raciocínio Lógico</h4>
+        <p>Conteúdo objetivo para prática, entendimento das questões e aceleração da revisão.</p>
+        <div class="module-links">
+          <a href="materiais/matematica.pdf" target="_blank">PDF de Matemática</a>
+          <a href="materiais/raciocinio-logico.pdf" target="_blank">PDF de Raciocínio Lógico</a>
+          <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">Assistir aula 02</a>
+        </div>
+      </article>
+
+      <article class="module-card">
+        <span class="module-tag">Disciplina</span>
+        <h4>Módulo 4 - Informática</h4>
+        <p>Material voltado para os tópicos mais cobrados, com apoio visual e revisão rápida.</p>
+        <div class="module-links">
+          <a href="materiais/informatica.pdf" target="_blank">PDF de Informática</a>
+          <a href="materiais/informatica-resumo.pdf" target="_blank">Resumo rápido</a>
+          <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">Assistir aula 03</a>
+        </div>
+      </article>
+
+      <article class="module-card">
+        <span class="module-tag">Lei seca</span>
+        <h4>Módulo 5 - Legislação</h4>
+        <p>Materiais organizados para leitura, memorização e estudo direcionado por tópicos.</p>
+        <div class="module-links">
+          <a href="materiais/legislacao.pdf" target="_blank">PDF de Legislação</a>
+          <a href="materiais/mapa-mental-legislacao.pdf" target="_blank">Mapa mental</a>
+          <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer">Assistir aula 04</a>
+        </div>
+      </article>
+
+      <article class="module-card">
+        <span class="module-tag">Treinamento</span>
+        <h4>Módulo 6 - Simulados e bônus</h4>
+        <p>Simulados, gabaritos, bônus especiais e materiais complementares para reta final.</p>
+        <div class="module-links">
+          <a href="materiais/simulado-01.pdf" target="_blank">Simulado 01</a>
+          <a href="materiais/simulado-02.pdf" target="_blank">Simulado 02</a>
+          <a href="materiais/gabarito.pdf" target="_blank">Gabarito comentado</a>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
