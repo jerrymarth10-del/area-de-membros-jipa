@@ -3,8 +3,25 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Grade de Estudos - Concurso SESAU</title>
+  <title>Plataforma SESAU - Grade de Estudos</title>
   <style>
+    :root {
+      --bg: #0f172a;
+      --panel: #111827;
+      --panel-2: #1e293b;
+      --card: #ffffff;
+      --text: #0f172a;
+      --muted: #64748b;
+      --line: #e2e8f0;
+      --primary: #0ea5e9;
+      --primary-dark: #0284c7;
+      --success: #0f766e;
+      --warning: #f59e0b;
+      --light: #f8fafc;
+      --shadow: 0 18px 40px rgba(15, 23, 42, 0.12);
+      --radius: 20px;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -12,277 +29,755 @@
       font-family: Arial, Helvetica, sans-serif;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      background: #f4f7fb;
-      color: #1f2937;
-      line-height: 1.6;
+      background: var(--light);
+      color: var(--text);
     }
 
-    .container {
-      width: 90%;
-      max-width: 1200px;
-      margin: 0 auto;
+    .layout {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 290px 1fr;
     }
 
-    header {
-      background: linear-gradient(135deg, #0f766e, #0ea5e9);
+    .sidebar {
+      background: linear-gradient(180deg, #0f172a, #111827);
+      color: #fff;
+      padding: 28px 20px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      border-right: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .brand {
+      margin-bottom: 28px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .brand span {
+      display: inline-block;
+      background: rgba(14,165,233,0.15);
+      color: #7dd3fc;
+      padding: 7px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .brand h1 {
+      font-size: 24px;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .brand p {
+      color: #cbd5e1;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .nav-title {
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      font-size: 12px;
+      color: #94a3b8;
+      margin: 8px 0 14px;
+    }
+
+    .nav-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .nav-links a {
+      color: #e2e8f0;
+      text-decoration: none;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.06);
+      padding: 12px 14px;
+      border-radius: 14px;
+      transition: 0.2s ease;
+      font-size: 14px;
+    }
+
+    .nav-links a:hover {
+      background: rgba(14,165,233,0.18);
+      border-color: rgba(14,165,233,0.35);
+      transform: translateX(4px);
+    }
+
+    .sidebar-tip {
+      margin-top: 24px;
+      background: rgba(15,118,110,0.16);
+      border: 1px solid rgba(45,212,191,0.2);
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .sidebar-tip h3 {
+      font-size: 15px;
+      margin-bottom: 8px;
+    }
+
+    .sidebar-tip p {
+      font-size: 13px;
+      color: #d1fae5;
+      line-height: 1.5;
+    }
+
+    .content {
+      padding: 32px;
+    }
+
+    .hero {
+      background: linear-gradient(135deg, #0ea5e9, #0f766e);
       color: white;
-      padding: 48px 0;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.12);
+      border-radius: 24px;
+      padding: 36px;
+      box-shadow: var(--shadow);
+      margin-bottom: 28px;
     }
 
-    .hero h1 {
-      font-size: 2.4rem;
-      margin-bottom: 12px;
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 24px;
+      align-items: center;
+    }
+
+    .hero h2 {
+      font-size: 34px;
+      line-height: 1.2;
+      margin-bottom: 14px;
     }
 
     .hero p {
-      font-size: 1.05rem;
+      font-size: 16px;
+      line-height: 1.7;
       max-width: 760px;
+      opacity: 0.96;
+    }
+
+    .hero-stats {
+      display: grid;
+      gap: 12px;
+    }
+
+    .stat {
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 18px;
+      padding: 16px;
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 24px;
+      margin-bottom: 4px;
+    }
+
+    .stat span {
+      font-size: 13px;
       opacity: 0.95;
     }
 
-    .badge {
-      display: inline-block;
-      margin-bottom: 18px;
-      background: rgba(255,255,255,0.18);
-      padding: 8px 14px;
-      border-radius: 999px;
-      font-size: 0.9rem;
-      font-weight: bold;
-    }
-
-    main {
-      padding: 40px 0 60px;
-    }
-
-    .intro-box {
-      background: white;
-      border-radius: 18px;
-      padding: 24px;
+    .section {
       margin-bottom: 28px;
-      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.08);
     }
 
-    .modules-grid {
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+
+    .section-header h3 {
+      font-size: 26px;
+    }
+
+    .section-header p {
+      color: var(--muted);
+      max-width: 760px;
+      line-height: 1.6;
+    }
+
+    .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
     }
 
+    .card {
+      background: var(--card);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--line);
+    }
+
     .module-card {
-      background: white;
-      border-radius: 18px;
-      padding: 24px;
-      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-      border-top: 6px solid #0ea5e9;
+      position: relative;
+      overflow: hidden;
     }
 
-    .module-card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 14px 32px rgba(15, 23, 42, 0.12);
+    .module-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 6px;
+      background: var(--primary);
     }
 
-    .module-card h2 {
-      font-size: 1.2rem;
-      margin-bottom: 12px;
-      color: #0f172a;
+    .module-card.success::before {
+      background: var(--success);
+    }
+
+    .module-card.warning::before {
+      background: var(--warning);
+    }
+
+    .module-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .module-head h4 {
+      font-size: 20px;
+      line-height: 1.3;
+    }
+
+    .tag {
+      white-space: nowrap;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: #e0f2fe;
+      color: #0369a1;
+    }
+
+    .tag.success {
+      background: #ccfbf1;
+      color: #115e59;
+    }
+
+    .tag.warning {
+      background: #fef3c7;
+      color: #92400e;
     }
 
     .module-card p {
-      font-size: 0.95rem;
-      color: #475569;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
       margin-bottom: 14px;
     }
 
     .module-card ul {
       padding-left: 18px;
+      margin-bottom: 18px;
     }
 
     .module-card li {
       margin-bottom: 8px;
+      line-height: 1.5;
       color: #334155;
-      font-size: 0.95rem;
+      font-size: 14px;
     }
 
-    .highlight {
-      border-top-color: #0f766e;
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
     }
 
-    .warning {
-      border-top-color: #f59e0b;
-    }
-
-    .footer-box {
-      margin-top: 34px;
-      background: #0f172a;
-      color: white;
-      border-radius: 18px;
-      padding: 28px;
-    }
-
-    .footer-box h3 {
-      margin-bottom: 12px;
-      font-size: 1.25rem;
-    }
-
-    .footer-box ul {
-      padding-left: 18px;
-    }
-
-    .footer-box li {
-      margin-bottom: 8px;
-    }
-
-    footer {
-      text-align: center;
-      padding: 24px 12px 36px;
-      color: #64748b;
-      font-size: 0.92rem;
-    }
-
-    .btn-top {
+    .btn {
       display: inline-block;
-      margin-top: 18px;
-      background: #0ea5e9;
-      color: white;
       text-decoration: none;
-      padding: 12px 18px;
-      border-radius: 10px;
-      font-weight: bold;
+      padding: 11px 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 700;
+      transition: 0.2s ease;
+      border: 1px solid transparent;
+      cursor: pointer;
     }
 
-    @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 1.9rem;
+    .btn-primary {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-outline {
+      background: #fff;
+      color: var(--text);
+      border-color: var(--line);
+    }
+
+    .btn-outline:hover {
+      background: #f8fafc;
+    }
+
+    .resource-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 16px;
+    }
+
+    .resource-box {
+      background: #fff;
+      border: 1px dashed #cbd5e1;
+      border-radius: 18px;
+      padding: 18px;
+      min-height: 150px;
+    }
+
+    .resource-box h5 {
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    .resource-box p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    .resource-box small {
+      display: block;
+      color: #94a3b8;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    .step {
+      background: #fff;
+      border-radius: 18px;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      padding: 20px;
+    }
+
+    .step-number {
+      width: 38px;
+      height: 38px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: #e0f2fe;
+      color: #0369a1;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .step h4 {
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    .step p {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .footer-note {
+      margin-top: 28px;
+      background: #0f172a;
+      color: #fff;
+      border-radius: 22px;
+      padding: 24px;
+    }
+
+    .footer-note h3 {
+      margin-bottom: 10px;
+      font-size: 22px;
+    }
+
+    .footer-note p {
+      color: #cbd5e1;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 980px) {
+      .layout {
+        grid-template-columns: 1fr;
       }
 
-      .hero p {
-        font-size: 0.98rem;
+      .sidebar {
+        position: relative;
+        height: auto;
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .content {
+        padding: 18px;
+      }
+
+      .hero {
+        padding: 24px;
+      }
+
+      .hero h2 {
+        font-size: 28px;
+      }
+
+      .section-header {
+        flex-direction: column;
+        align-items: flex-start;
       }
     }
   </style>
 </head>
 <body>
-  <header>
-    <div class="container hero">
-      <span class="badge">Plataforma de Estudos</span>
-      <h1>Grade de Estudos - Concurso SESAU</h1>
-      <p>
-        Estrutura base de matérias para organizar os estudos dos alunos na plataforma.
-        Essa grade pode ser usada para diferentes cargos, mantendo as disciplinas gerais
-        e separando os conteúdos específicos conforme a área escolhida.
-      </p>
-    </div>
-  </header>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="brand">
+        <span>Plataforma de Estudos</span>
+        <h1>SESAU Base Geral</h1>
+        <p>Modelo pronto para organizar matérias, aulas, PDFs, questões e simulados dentro da sua plataforma.</p>
+      </div>
 
-  <main>
-    <div class="container">
-      <section class="intro-box">
-        <h2 style="margin-bottom: 10px;">Organização sugerida</h2>
+      <div class="nav-title">Menu</div>
+      <nav class="nav-links">
+        <a href="#inicio">Visão geral</a>
+        <a href="#modulos">Módulos da grade</a>
+        <a href="#recursos">Blocos de conteúdo</a>
+        <a href="#como-usar">Como cadastrar</a>
+        <a href="#pdfs">Área dos PDFs</a>
+      </nav>
+
+      <div class="sidebar-tip">
+        <h3>Dica</h3>
+        <p>Você pode duplicar os cards e trocar o nome da matéria, o link do PDF e os botões conforme cada cargo.</p>
+      </div>
+    </aside>
+
+    <main class="content">
+      <section class="hero" id="inicio">
+        <div class="hero-grid">
+          <div>
+            <h2>Grade de estudos profissional para sua plataforma</h2>
+            <p>
+              Esta versão foi montada para ficar com cara de plataforma real: menu lateral, cards por disciplina,
+              área de recursos e espaço para você adicionar PDFs, aulas e questões separadas por bloco.
+            </p>
+          </div>
+
+          <div class="hero-stats">
+            <div class="stat">
+              <strong>6</strong>
+              <span>Módulos principais</span>
+            </div>
+            <div class="stat">
+              <strong>100%</strong>
+              <span>HTML simples para GitHub e Vercel</span>
+            </div>
+            <div class="stat">
+              <strong>Fácil</strong>
+              <span>Para trocar PDFs e links</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="modulos">
+        <div class="section-header">
+          <div>
+            <h3>Módulos da grade</h3>
+            <p>Estrutura base para concursos da SESAU. Você pode manter a base geral e adaptar a parte específica conforme o cargo.</p>
+          </div>
+        </div>
+
+        <div class="grid">
+          <article class="card module-card">
+            <div class="module-head">
+              <h4>1. Língua Portuguesa</h4>
+              <span class="tag">Base</span>
+            </div>
+            <p>Disciplina essencial com foco em interpretação, gramática e estrutura da língua.</p>
+            <ul>
+              <li>Interpretação de texto</li>
+              <li>Ortografia oficial</li>
+              <li>Acentuação gráfica</li>
+              <li>Classes de palavras</li>
+              <li>Concordância</li>
+              <li>Regência</li>
+              <li>Pontuação</li>
+              <li>Crase</li>
+            </ul>
+            <div class="actions">
+              <a class="btn btn-primary" href="#pdfs">Ver PDFs</a>
+              <a class="btn btn-outline" href="#recursos">Ver recursos</a>
+            </div>
+          </article>
+
+          <article class="card module-card">
+            <div class="module-head">
+              <h4>2. Raciocínio Lógico</h4>
+              <span class="tag">Base</span>
+            </div>
+            <p>Organize aulas e exercícios de lógica, matemática básica e interpretação de problemas.</p>
+            <ul>
+              <li>Proposições</li>
+              <li>Conectivos lógicos</li>
+              <li>Tabelas verdade</li>
+              <li>Sequências</li>
+              <li>Porcentagem</li>
+              <li>Razão e proporção</li>
+              <li>Regra de três</li>
+            </ul>
+            <div class="actions">
+              <a class="btn btn-primary" href="#pdfs">Ver PDFs</a>
+              <a class="btn btn-outline" href="#recursos">Ver recursos</a>
+            </div>
+          </article>
+
+          <article class="card module-card">
+            <div class="module-head">
+              <h4>3. Informática</h4>
+              <span class="tag">Base</span>
+            </div>
+            <p>Bloco ideal para colocar materiais de informática básica, Office, internet e segurança.</p>
+            <ul>
+              <li>Conceitos básicos</li>
+              <li>Sistema operacional</li>
+              <li>Word</li>
+              <li>Excel</li>
+              <li>PowerPoint</li>
+              <li>Internet e e-mail</li>
+              <li>Segurança da informação</li>
+            </ul>
+            <div class="actions">
+              <a class="btn btn-primary" href="#pdfs">Ver PDFs</a>
+              <a class="btn btn-outline" href="#recursos">Ver recursos</a>
+            </div>
+          </article>
+
+          <article class="card module-card warning">
+            <div class="module-head">
+              <h4>4. Atualidades</h4>
+              <span class="tag warning">Opcional</span>
+            </div>
+            <p>Pode ser usada quando o edital cobrar temas recentes, saúde pública e contexto nacional.</p>
+            <ul>
+              <li>Temas nacionais</li>
+              <li>Temas internacionais</li>
+              <li>Saúde pública</li>
+              <li>Política e economia</li>
+              <li>Tecnologia e sociedade</li>
+            </ul>
+            <div class="actions">
+              <a class="btn btn-primary" href="#pdfs">Ver PDFs</a>
+              <a class="btn btn-outline" href="#recursos">Ver recursos</a>
+            </div>
+          </article>
+
+          <article class="card module-card success">
+            <div class="module-head">
+              <h4>5. SUS e Legislação da Saúde</h4>
+              <span class="tag success">Muito importante</span>
+            </div>
+            <p>Um dos principais blocos da área da saúde, excelente para separar por leis e políticas públicas.</p>
+            <ul>
+              <li>Lei 8.080/1990</li>
+              <li>Lei 8.142/1990</li>
+              <li>Princípios do SUS</li>
+              <li>Diretrizes do SUS</li>
+              <li>Organização do sistema</li>
+              <li>Atenção básica</li>
+              <li>Humanização</li>
+              <li>Redes de atenção</li>
+            </ul>
+            <div class="actions">
+              <a class="btn btn-primary" href="#pdfs">Ver PDFs</a>
+              <a class="btn btn-outline" href="#recursos">Ver recursos</a>
+            </div>
+          </article>
+
+          <article class="card module-card">
+            <div class="module-head">
+              <h4>6. Conhecimentos Específicos</h4>
+              <span class="tag">Por cargo</span>
+            </div>
+            <p>Crie versões separadas para cada área, mantendo a base comum e trocando apenas esse módulo.</p>
+            <ul>
+              <li>Conteúdo técnico</li>
+              <li>Legislação da função</li>
+              <li>Procedimentos da área</li>
+              <li>Normas profissionais</li>
+              <li>Temas específicos do cargo</li>
+            </ul>
+            <div class="actions">
+              <a class="btn btn-primary" href="#pdfs">Ver PDFs</a>
+              <a class="btn btn-outline" href="#recursos">Ver recursos</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="recursos">
+        <div class="section-header">
+          <div>
+            <h3>Blocos de conteúdo</h3>
+            <p>Você pode repetir estes blocos dentro de cada matéria para organizar a experiência do aluno.</p>
+          </div>
+        </div>
+
+        <div class="resource-grid">
+          <div class="resource-box">
+            <h5>Videoaulas</h5>
+            <p>Coloque o botão da aula, link do YouTube privado, Hotmart, Kiwify ou página interna.</p>
+            <small>Exemplo: Aula 01 - Interpretação de Texto</small>
+          </div>
+
+          <div class="resource-box">
+            <h5>PDFs</h5>
+            <p>Adicione apostilas, resumos e leis em PDF com botão de abrir ou baixar.</p>
+            <small>Exemplo: Apostila de Português.pdf</small>
+          </div>
+
+          <div class="resource-box">
+            <h5>Questões</h5>
+            <p>Crie uma área para listas de exercícios, questões comentadas e provas anteriores.</p>
+            <small>Exemplo: 30 questões de SUS comentadas</small>
+          </div>
+
+          <div class="resource-box">
+            <h5>Simulados</h5>
+            <p>Separe simulados por disciplina ou simulados gerais para revisão final.</p>
+            <small>Exemplo: Simulado 01 - Conhecimentos Básicos</small>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="como-usar">
+        <div class="section-header">
+          <div>
+            <h3>Como cadastrar na prática</h3>
+            <p>Fluxo simples para montar tudo no GitHub e publicar depois na Vercel.</p>
+          </div>
+        </div>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-number">1</div>
+            <h4>Crie as pastas</h4>
+            <p>Separe o projeto com uma pasta principal e outra pasta chamada <strong>pdfs</strong> para guardar seus arquivos.</p>
+          </div>
+
+          <div class="step">
+            <div class="step-number">2</div>
+            <h4>Envie os PDFs</h4>
+            <p>Suba os arquivos para o repositório e mantenha nomes simples, sem espaços ou caracteres estranhos.</p>
+          </div>
+
+          <div class="step">
+            <div class="step-number">3</div>
+            <h4>Ligue o botão ao arquivo</h4>
+            <p>Troque o link do botão dentro do HTML para apontar para cada PDF correspondente.</p>
+          </div>
+
+          <div class="step">
+            <div class="step-number">4</div>
+            <h4>Publique na Vercel</h4>
+            <p>Depois de subir no GitHub, importe o repositório na Vercel e publique o site.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="pdfs">
+        <div class="section-header">
+          <div>
+            <h3>Exemplo de área de PDFs</h3>
+            <p>Aqui está o modelo que você vai repetir para cada matéria. Basta trocar título e link do arquivo.</p>
+          </div>
+        </div>
+
+        <div class="grid">
+          <article class="card">
+            <div class="module-head">
+              <h4>Português - Materiais</h4>
+              <span class="tag">PDFs</span>
+            </div>
+            <p>Use este bloco para apostilas, resumos e listas da disciplina.</p>
+            <div class="actions">
+              <a class="btn btn-primary" href="pdfs/portugues-apostila.pdf" target="_blank">Abrir Apostila</a>
+              <a class="btn btn-outline" href="pdfs/portugues-resumo.pdf" target="_blank">Abrir Resumo</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="module-head">
+              <h4>SUS - Materiais</h4>
+              <span class="tag success">PDFs</span>
+            </div>
+            <p>Ideal para leis, mapas mentais e material comentado do SUS.</p>
+            <div class="actions">
+              <a class="btn btn-primary" href="pdfs/sus-lei-8080.pdf" target="_blank">Lei 8.080</a>
+              <a class="btn btn-outline" href="pdfs/sus-resumo.pdf" target="_blank">Resumo SUS</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="module-head">
+              <h4>Informática - Materiais</h4>
+              <span class="tag">PDFs</span>
+            </div>
+            <p>Bloco para apostilas de Word, Excel, internet e segurança da informação.</p>
+            <div class="actions">
+              <a class="btn btn-primary" href="pdfs/informatica-apostila.pdf" target="_blank">Abrir Apostila</a>
+              <a class="btn btn-outline" href="pdfs/informatica-questoes.pdf" target="_blank">Ver Questões</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="footer-note">
+        <h3>Pronto para editar</h3>
         <p>
-          Use esta página como base para cadastrar aulas, PDFs, resumos, questões comentadas
-          e simulados dentro de cada módulo. A estrutura abaixo foi pensada para facilitar a
-          navegação dos alunos e deixar sua plataforma mais profissional.
+          Este arquivo já foi preparado para você começar a usar. Agora é só trocar os nomes, duplicar os cards das matérias
+          e substituir os links dos PDFs pelos seus arquivos reais dentro da pasta <strong>pdfs</strong>.
         </p>
       </section>
+    </main>
+  </div>
+</body>
+</html>
 
-      <section class="modules-grid">
-        <article class="module-card">
-          <h2>1. Língua Portuguesa</h2>
-          <p>Conteúdo base presente na maior parte dos concursos públicos.</p>
-          <ul>
-            <li>Interpretação de texto</li>
-            <li>Ortografia oficial</li>
-            <li>Acentuação gráfica</li>
-            <li>Classes de palavras</li>
-            <li>Concordância verbal e nominal</li>
-            <li>Regência verbal e nominal</li>
-            <li>Pontuação</li>
-            <li>Crase</li>
-          </ul>
-        </article>
-
-        <article class="module-card">
-          <h2>2. Raciocínio Lógico</h2>
-          <p>Matéria comum em concursos, com foco em lógica e resolução de problemas.</p>
-          <ul>
-            <li>Proposições e conectivos</li>
-            <li>Tabelas verdade</li>
-            <li>Sequências lógicas</li>
-            <li>Porcentagem</li>
-            <li>Razão e proporção</li>
-            <li>Regra de três</li>
-            <li>Resolução de problemas</li>
-          </ul>
-        </article>
-
-        <article class="module-card">
-          <h2>3. Informática</h2>
-          <p>Fundamentos práticos de informática cobrados em provas objetivas.</p>
-          <ul>
-            <li>Conceitos básicos de informática</li>
-            <li>Sistema operacional</li>
-            <li>Word, Excel e PowerPoint</li>
-            <li>Internet e navegação</li>
-            <li>Correio eletrônico</li>
-            <li>Segurança da informação</li>
-          </ul>
-        </article>
-
-        <article class="module-card warning">
-          <h2>4. Atualidades</h2>
-          <p>Disciplina que pode variar conforme o edital, mas vale manter na estrutura.</p>
-          <ul>
-            <li>Temas nacionais e internacionais</li>
-            <li>Saúde pública</li>
-            <li>Política e economia</li>
-            <li>Tecnologia e sociedade</li>
-            <li>Temas relevantes do Brasil</li>
-          </ul>
-        </article>
-
-        <article class="module-card highlight">
-          <h2>5. SUS e Legislação da Saúde</h2>
-          <p>Um dos módulos mais importantes para concursos da área da saúde.</p>
-          <ul>
-            <li>Lei nº 8.080/1990</li>
-            <li>Lei nº 8.142/1990</li>
-            <li>Princípios e diretrizes do SUS</li>
-            <li>Organização do SUS</li>
-            <li>Políticas públicas de saúde</li>
-            <li>Atenção Básica</li>
-            <li>Humanização em saúde</li>
-            <li>Redes de Atenção à Saúde</li>
-          </ul>
-        </article>
-
-        <article class="module-card">
-          <h2>6. Conhecimentos Específicos</h2>
-          <p>Esse módulo deve mudar conforme o cargo escolhido pelo aluno.</p>
-          <ul>
-            <li>Conteúdo técnico da área</li>
-            <li>Normas profissionais</li>
-            <li>Procedimentos específicos</li>
-            <li>Leis e regulamentos do cargo</li>
-            <li>Temas próprios da função</li>
-          </ul>
-        </article>
-      </section>
-
-      <section class="footer-box">
-        <h3>Como usar na sua plataforma</h3>
-        <ul>
-          <li>Cadastre videoaulas dentro de cada módulo</li>
-          <li>Adicione PDFs e resumos em cada disciplina</li>
-          <li>Inclua questões comentadas por assunto</li>
-          <li>Crie simulados separados por matéria</li>
-          <li>Separe o módulo de conhecimentos específicos por cargo</li>
-        </ul>
-        <a href="#top" class="btn-top">Usar esta estrutura</a>
-      </section>
-    </div>
   </main>
 
   <footer>
