@@ -4,43 +4,709 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Área do Aluno | Concurso Ji-Paraná RO</title>
-  <link rel="stylesheet" href="styles.css" />
-</head>
-<body class="login-body">
-  <div class="overlay"></div>
+  <style>
+    :root {
+      --bg: #f5f7fb;
+      --card: #ffffff;
+      --text: #162033;
+      --muted: #667085;
+      --line: #e7ecf3;
+      --primary: #2457ff;
+      --primary-dark: #1639b8;
+      --accent: #10b981;
+      --warning: #f59e0b;
+      --shadow: 0 18px 45px rgba(17, 24, 39, 0.08);
+      --radius: 24px;
+      --radius-sm: 16px;
+      --max: 1180px;
+    }
 
-  <main class="login-container">
-    <section class="login-card">
-      <div class="brand-block">
-        <span class="brand-badge">Acesso exclusivo</span>
-        <h1>Concurso Ji-Paraná RO</h1>
-        <p>Área exclusiva com aulas, PDFs, simulados, cronograma e materiais de apoio.</p>
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Inter, Arial, sans-serif;
+      background: linear-gradient(180deg, #eef3ff 0%, var(--bg) 30%, #f7f9fc 100%);
+      color: var(--text);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(calc(100% - 32px), var(--max));
+      margin: 0 auto;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      backdrop-filter: blur(12px);
+      background: rgba(255,255,255,0.82);
+      border-bottom: 1px solid rgba(231,236,243,0.95);
+    }
+
+    .topbar-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-badge {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary), #4f7cff);
+      box-shadow: var(--shadow);
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: .2s ease;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-primary {
+      color: #fff;
+      background: linear-gradient(135deg, var(--primary), #3f71ff);
+      box-shadow: 0 14px 30px rgba(36, 87, 255, 0.24);
+    }
+
+    .btn-outline {
+      background: #fff;
+      border-color: var(--line);
+      color: var(--text);
+    }
+
+    .hero {
+      padding: 42px 0 28px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .hero-card,
+    .price-card,
+    .feature-card,
+    .module-card,
+    .faq-card,
+    .notice-card,
+    .footer-card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card {
+      padding: 38px;
+      background:
+        radial-gradient(circle at top right, rgba(79,124,255,.15), transparent 28%),
+        radial-gradient(circle at left bottom, rgba(16,185,129,.09), transparent 24%),
+        #fff;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--primary);
+      background: rgba(36, 87, 255, 0.08);
+      margin-bottom: 18px;
+    }
+
+    h1 {
+      margin: 0 0 14px;
+      font-size: clamp(32px, 5vw, 52px);
+      line-height: 1.05;
+      letter-spacing: -0.04em;
+    }
+
+    .hero p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 17px;
+      line-height: 1.7;
+    }
+
+    .hero-points {
+      margin: 26px 0 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+
+    .mini-stat {
+      padding: 18px;
+      border-radius: 18px;
+      background: #f8faff;
+      border: 1px solid var(--line);
+    }
+
+    .mini-stat strong {
+      display: block;
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .mini-stat span {
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .price-card {
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 20px;
+      background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+    }
+
+    .label {
+      color: var(--muted);
+      font-size: 14px;
+      margin-bottom: 6px;
+    }
+
+    .old-price {
+      color: #8a94a7;
+      text-decoration: line-through;
+      font-weight: 700;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .price {
+      font-size: clamp(34px, 5vw, 46px);
+      font-weight: 900;
+      letter-spacing: -0.04em;
+      margin: 0;
+    }
+
+    .installments {
+      color: var(--muted);
+      margin-top: 6px;
+      margin-bottom: 18px;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .soft-badge {
+      padding: 10px 14px;
+      background: #f4f7fc;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #344054;
+    }
+
+    .section {
+      padding: 20px 0;
+    }
+
+    .section-head {
+      margin-bottom: 20px;
+    }
+
+    .section-head h2 {
+      margin: 0 0 8px;
+      font-size: clamp(28px, 4vw, 38px);
+      letter-spacing: -0.03em;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .feature-card {
+      padding: 22px;
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      border-radius: 16px;
+      background: #eef4ff;
+      margin-bottom: 16px;
+    }
+
+    .feature-card h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .feature-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 15px;
+    }
+
+    .notice-card {
+      padding: 22px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 18px;
+      background: linear-gradient(135deg, rgba(16,185,129,.08), rgba(36,87,255,.05));
+    }
+
+    .notice-card strong { display: block; margin-bottom: 4px; }
+    .notice-card span { color: var(--muted); }
+
+    .modules-wrap {
+      display: grid;
+      gap: 16px;
+    }
+
+    .module-card {
+      padding: 26px;
+    }
+
+    .module-top {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 12px;
+    }
+
+    .module-tag {
+      display: inline-flex;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #eef4ff;
+      color: var(--primary);
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .module-card h3 {
+      margin: 0;
+      font-size: 24px;
+      letter-spacing: -0.02em;
+    }
+
+    .module-card p {
+      margin: 0 0 18px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .resource-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .resource-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #f9fbff;
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+
+    .faq-card {
+      padding: 24px;
+    }
+
+    .faq-card h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .faq-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .footer {
+      padding: 22px 0 42px;
+    }
+
+    .footer-card {
+      padding: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-copy {
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    @media (max-width: 1024px) {
+      .hero-grid,
+      .feature-grid,
+      .faq-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .hero-points {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .hero-grid,
+      .feature-grid,
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-card,
+      .price-card,
+      .module-card,
+      .faq-card,
+      .footer-card,
+      .notice-card {
+        padding: 20px;
+      }
+
+      .topbar-inner,
+      .notice-card,
+      .footer-card {
+        align-items: stretch;
+      }
+
+      .top-actions {
+        width: 100%;
+      }
+
+      .top-actions .btn {
+        flex: 1;
+      }
+
+      h1 {
+        font-size: 34px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <div class="brand-badge">JP</div>
+        <div>
+          <div style="font-size:14px;color:#667085;font-weight:700;">Área exclusiva do aluno</div>
+          <div>Concurso Ji-Paraná RO</div>
+        </div>
       </div>
 
-      <div class="login-panel">
-        <h2>Entrar na área de membros</h2>
-        <p class="muted">
-          Após a compra, seu acesso é liberado automaticamente e você entra por aqui.
-        </p>
+      <div class="top-actions">
+        <a class="btn btn-outline" href="https://wa.me/5569999999999" target="_blank" rel="noopener noreferrer">Suporte VIP</a>
+        <a class="btn btn-primary" href="#modulos">Acessar materiais</a>
+      </div>
+    </div>
+  </header>
 
-        <form id="loginForm" class="login-form">
-          <label for="nome">Seu nome</label>
-          <input id="nome" type="text" placeholder="Digite seu nome" required />
+  <main>
+    <section class="hero">
+      <div class="container hero-grid">
+        <div class="hero-card">
+          <div class="eyebrow">Preparatório completo organizado em um só lugar</div>
+          <h1>Estude com clareza, ritmo e foco até a prova.</h1>
+          <p>
+            A sua área de membros agora segue uma identidade mais profissional, inspirada em páginas de curso preparatório:
+            destaque para benefícios, acesso rápido aos materiais, sensação de produto premium e navegação muito mais clara.
+          </p>
 
-          <label for="senha">Senha de acesso</label>
-          <input id="senha" type="password" placeholder="Digite sua senha" required />
+          <div class="hero-points">
+            <div class="mini-stat">
+              <strong>06 módulos</strong>
+              <span>Conteúdo separado por etapa de estudo.</span>
+            </div>
+            <div class="mini-stat">
+              <strong>PDFs atualizados</strong>
+              <span>Apostilas, resumos, mapas mentais e cronograma.</span>
+            </div>
+            <div class="mini-stat">
+              <strong>Bônus exclusivos</strong>
+              <span>Simulados, gabaritos e materiais de reta final.</span>
+            </div>
+          </div>
+        </div>
 
-          <button type="submit">Acessar agora</button>
-        </form>
+        <aside class="price-card">
+          <div>
+            <div class="label">Acesso do aluno</div>
+            <span class="old-price">Área simples anterior</span>
+            <p class="price">Portal Premium</p>
+            <div class="installments">Layout mais forte para conversão, percepção de valor e organização.</div>
 
-        <div class="mini-note">
-          <strong>Importante:</strong> esta versão é simples e visual. Se depois você quiser,
-          eu posso te passar a versão com login real.
+            <div class="badge-row">
+              <span class="soft-badge">Suporte por WhatsApp</span>
+              <span class="soft-badge">Acesso mobile</span>
+              <span class="soft-badge">Materiais em PDF</span>
+            </div>
+          </div>
+
+          <div style="display:grid;gap:12px;">
+            <a class="btn btn-primary" href="#modulos">Começar agora</a>
+            <a class="btn btn-outline" href="https://wa.me/5569999999999" target="_blank" rel="noopener noreferrer">Falar com o suporte</a>
+            <div style="font-size:13px;color:#667085;text-align:center;">Acesso imediato aos materiais do preparatório</div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>O que você vai ter acesso</h2>
+          <p>Estrutura inspirada em páginas de curso como o estilo do preparatório SESAU: benefícios destacados, blocos informativos e chamada principal mais forte.</p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="feature-icon">📅</div>
+            <h3>Cronograma de estudos</h3>
+            <p>Planejamento inicial para o aluno saber exatamente por onde começar e como seguir até a prova.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">🎥</div>
+            <h3>Videoaulas</h3>
+            <p>Aulas separadas por disciplina com acesso rápido para revisar os temas mais cobrados.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">📘</div>
+            <h3>Material em PDF</h3>
+            <p>Apostilas, resumos, mapas mentais e arquivos organizados para estudo online ou offline.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">📝</div>
+            <h3>Simulados e bônus</h3>
+            <p>Treinamento prático para reta final com gabaritos e reforço de conteúdo.</p>
+          </article>
+        </div>
+
+        <div class="notice-card">
+          <div>
+            <strong>Comece pelo plano de estudos</strong>
+            <span>Isso melhora a experiência do aluno e reduz a sensação de conteúdo solto logo na entrada da página.</span>
+          </div>
+          <a class="btn btn-primary" href="#modulos">Ver módulos</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="modulos">
+      <div class="container">
+        <div class="section-head">
+          <h2>Conteúdo do curso</h2>
+          <p>Os mesmos materiais da sua área de membros atual, só que com visual mais moderno, premium e organizado para navegação rápida.</p>
+        </div>
+
+        <div class="modules-wrap">
+          <article class="module-card">
+            <div class="module-top">
+              <div>
+                <span class="module-tag">Módulo 1</span>
+                <h3>Edital e plano de estudos</h3>
+              </div>
+            </div>
+            <p>Materiais de início rápido para o aluno entender a prova e seguir a ordem correta de estudo.</p>
+            <div class="resource-list">
+              <a class="resource-link" href="#">Baixar edital</a>
+              <a class="resource-link" href="#">Plano de estudos</a>
+              <a class="resource-link" href="#">Cronograma inicial</a>
+            </div>
+          </article>
+
+          <article class="module-card">
+            <div class="module-top">
+              <div>
+                <span class="module-tag">Módulo 2</span>
+                <h3>Língua Portuguesa</h3>
+              </div>
+            </div>
+            <p>Aulas, apostilas, exercícios e revisão prática para reforço dos principais temas.</p>
+            <div class="resource-list">
+              <a class="resource-link" href="#">Apostila de Português</a>
+              <a class="resource-link" href="#">Lista de exercícios</a>
+              <a class="resource-link" href="#">Assistir aula 01</a>
+            </div>
+          </article>
+
+          <article class="module-card">
+            <div class="module-top">
+              <div>
+                <span class="module-tag">Módulo 3</span>
+                <h3>Matemática e Raciocínio Lógico</h3>
+              </div>
+            </div>
+            <p>Conteúdo objetivo para prática, entendimento das questões e aceleração da revisão.</p>
+            <div class="resource-list">
+              <a class="resource-link" href="#">PDF de Matemática</a>
+              <a class="resource-link" href="#">PDF de Raciocínio Lógico</a>
+              <a class="resource-link" href="#">Assistir aula 02</a>
+            </div>
+          </article>
+
+          <article class="module-card">
+            <div class="module-top">
+              <div>
+                <span class="module-tag">Módulo 4</span>
+                <h3>Informática</h3>
+              </div>
+            </div>
+            <p>Material voltado para os tópicos mais cobrados, com apoio visual e revisão rápida.</p>
+            <div class="resource-list">
+              <a class="resource-link" href="#">PDF de Informática</a>
+              <a class="resource-link" href="#">Resumo rápido</a>
+              <a class="resource-link" href="#">Assistir aula 03</a>
+            </div>
+          </article>
+
+          <article class="module-card">
+            <div class="module-top">
+              <div>
+                <span class="module-tag">Módulo 5</span>
+                <h3>Legislação</h3>
+              </div>
+            </div>
+            <p>Materiais organizados para leitura, memorização e estudo direcionado por tópicos.</p>
+            <div class="resource-list">
+              <a class="resource-link" href="#">PDF de Legislação</a>
+              <a class="resource-link" href="#">Mapa mental</a>
+              <a class="resource-link" href="#">Assistir aula 04</a>
+            </div>
+          </article>
+
+          <article class="module-card">
+            <div class="module-top">
+              <div>
+                <span class="module-tag">Módulo 6</span>
+                <h3>Simulados e bônus</h3>
+              </div>
+            </div>
+            <p>Simulados, gabaritos, bônus especiais e materiais complementares para reta final.</p>
+            <div class="resource-list">
+              <a class="resource-link" href="#">Simulado 01</a>
+              <a class="resource-link" href="#">Simulado 02</a>
+              <a class="resource-link" href="#">Gabarito comentado</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Perguntas frequentes</h2>
+          <p>Esse bloco ajuda a deixar a página com cara de plataforma profissional e reduz dúvidas básicas do aluno.</p>
+        </div>
+
+        <div class="faq-grid">
+          <article class="faq-card">
+            <h3>Por onde eu começo?</h3>
+            <p>Comece pelo edital, plano de estudos e cronograma inicial. Depois siga os módulos na ordem proposta.</p>
+          </article>
+          <article class="faq-card">
+            <h3>Posso acessar pelo celular?</h3>
+            <p>Sim. O layout foi pensado para funcionar bem em dispositivos móveis e facilitar o acesso aos PDFs e aulas.</p>
+          </article>
+          <article class="faq-card">
+            <h3>Os materiais ficam organizados?</h3>
+            <p>Sim. Cada disciplina tem seus próprios botões de acesso, o que evita confusão e melhora a experiência do aluno.</p>
+          </article>
+          <article class="faq-card">
+            <h3>Como falar com o suporte?</h3>
+            <p>Use o botão de suporte VIP no topo ou no card lateral para abrir o WhatsApp rapidamente.</p>
+          </article>
         </div>
       </div>
     </section>
   </main>
 
-  <script src="script.js"></script>
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-card">
+        <div>
+          <strong style="display:block;font-size:20px;margin-bottom:6px;">Concurso Ji-Paraná RO</strong>
+          <div class="footer-copy">Área exclusiva do aluno com visual reformulado, organização por módulos e navegação inspirada em páginas de curso preparatório.</div>
+        </div>
+        <div class="top-actions">
+          <a class="btn btn-outline" href="#top">Voltar ao topo</a>
+          <a class="btn btn-primary" href="https://wa.me/5569999999999" target="_blank" rel="noopener noreferrer">Chamar no WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </footer>
 </body>
 </html>
